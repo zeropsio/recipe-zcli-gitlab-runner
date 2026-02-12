@@ -1,0 +1,15 @@
+project:
+  name: runners
+  envVariables:
+    GITLAB_URL: "PLACE_YOUR_GITLAB_URL_HERE" # e.g. https://gitlab.com/
+
+services:
+  - hostname: zclirunner
+    type: ubuntu@24.04
+    envSecrets:
+      TAG: zcli
+      GITLAB_TOKEN: "PLACE_YOUR_GITLAB_TOKEN_HERE"
+    buildFromGit: https://github.com/zeropsio/recipe-zcli-gitlab-runner
+    # Set a fixed number of containers, runners shouldn't be scaling horizontally automatically
+    minContainers: 2
+    maxContainers: 2

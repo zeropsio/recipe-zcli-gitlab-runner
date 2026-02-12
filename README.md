@@ -1,0 +1,50 @@
+# Zerops x GitLab Runner
+
+A [GitLab Runner](https://docs.gitlab.com/runner/) running on [Zerops](https://zerops.io), using the built-in zCLI binary for deployments directly from your CI/CD pipelines.
+
+<br/>
+
+## Deploy on Zerops
+
+You can either click the deploy button to import the recipe directly, or manually copy the [import yaml](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops-project-import.yml) into the import dialog in the Zerops app.
+
+[![Deploy on Zerops](https://github.com/zeropsio/recipe-shared-assets/blob/main/deploy-button/green/deploy-button.svg)](https://app.zerops.io/recipe/zcli-gitlab-runner)
+
+<br/>
+
+## Recipe features
+
+- **Ubuntu 24.04** base with GitLab Runner installed via official binary
+- **zCLI** available out of the box for Zerops deployments from your pipelines
+- **Shell executor** for full control over the build environment
+- Fixed container count — runners shouldn't scale horizontally automatically (adjust as needed)
+- **Health check** using `gitlab-runner status`
+
+<br/>
+
+## Configuring
+
+Set the following environment variables in the [import yaml](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops-project-import.yml) before importing:
+
+| Variable | Description |
+|---|---|
+| `GITLAB_URL` | URL of your GitLab instance (e.g. `https://gitlab.com/`) |
+| `GITLAB_TOKEN` | Runner authentication token from GitLab |
+
+> If your GitLab instance uses an IP blocklist, create the project first, allow its IP address in your GitLab settings, then import the `zclirunner` service.
+
+To adjust capacity for production workloads, increase `minContainers`/`maxContainers` and allocate more CPU/RAM to the service.
+
+<br/>
+
+## Changes made over a default GitLab Runner installation
+
+- [x] Add [zerops.yml](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml) to the repository
+- [x] Install runner dependencies (`git`, `zip`, `gcc`, `bzr`, `make`) in [`prepareCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L7)
+- [x] Download and install the GitLab Runner binary in [`prepareCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L8)
+- [x] Register the runner automatically on startup via [`initCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L29)
+- [x] Configure a [health check](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L34) using `gitlab-runner status`
+
+<br/>
+
+Need help setting your project up? Join [Zerops Discord community](https://discord.com/invite/WDvCZ54).
