@@ -5,7 +5,7 @@ project:
 
 services:
   - hostname: zclirunner
-    type: ubuntu@24.04
+    type: ubuntu@26.04
     envSecrets:
       TAG: zcli
       GITLAB_TOKEN: "PLACE_YOUR_GITLAB_TOKEN_HERE"

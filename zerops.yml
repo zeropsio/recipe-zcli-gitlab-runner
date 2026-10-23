@@ -2,7 +2,7 @@ zerops:
   - setup: zclirunner
     run:
       os: ubuntu
-      base: ubuntu@24.04
+      base: ubuntu@26.04
       prepareCommands:
         - sudo apt update && sudo apt install -y git zip gcc bzr make
         - |
@@ -26,8 +26,13 @@ zerops:
           sudo chown -R gitlab-runner:gitlab-runner /home/gitlab-runner/
 
       initCommands:
-        - sudo gitlab-runner start
-        - sudo gitlab-runner register --non-interactive --url "${GITLAB_URL?:}" --token "${GITLAB_TOKEN?:}" --executor shell --name "${ZEROPS_StackName?:}-${ZEROPS_Number?:}"
+        # To re-run the initialization, remove the `initialized` file and restart the service in Zerops
+        - |
+          if [ -f 'initialized' ]; then exit 0; fi
+          sudo gitlab-runner start
+          sudo gitlab-runner unregister --name "${ZEROPS_StackName?:}-${ZEROPS_Number?:}" || true
+          sudo gitlab-runner register --non-interactive --url "${GITLAB_URL?:}" --token "${GITLAB_TOKEN?:}" --executor shell --name "${ZEROPS_StackName?:}-${ZEROPS_Number?:}"
+          touch initialized
 
       # https://docs.gitlab.com/runner/commands/#gitlab-runner-status
       # The exit code is zero when the service is running and non-zero when the service is not running.
