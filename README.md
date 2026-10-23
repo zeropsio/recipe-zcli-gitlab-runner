@@ -42,10 +42,10 @@ To adjust capacity for production workloads, increase `minContainers`/`maxContai
 ## Changes made over a default GitLab Runner installation
 
 - [x] Add [zerops.yml](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml) to the repository
-- [x] Install runner dependencies (`git`, `zip`, `gcc`, `bzr`, `make`) in [`prepareCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L7)
-- [x] Download and install the GitLab Runner binary in [`prepareCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L8)
-- [x] Register the runner automatically on startup via [`initCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L30)
-- [x] Configure a [health check](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L41) using `gitlab-runner status`
+- [x] Install runner dependencies (`git`, `zip`, `gcc`, `bzr`, `make`) in [`prepareCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L6)
+- [x] Download and install the GitLab Runner binary in [`prepareCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L7)
+- [x] Register the runner automatically on startup via [`initCommands`](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L29)
+- [x] Configure a [health check](https://github.com/zeropsio/recipe-zcli-gitlab-runner/blob/main/zerops.yml#L40) using `gitlab-runner status`
 
 <br/>
 

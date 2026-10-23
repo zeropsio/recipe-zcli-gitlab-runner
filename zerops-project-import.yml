@@ -6,9 +6,12 @@ project:
 services:
   - hostname: zclirunner
     type: ubuntu@26.04
+    vault:
     envSecrets:
       TAG: zcli
-      GITLAB_TOKEN: "PLACE_YOUR_GITLAB_TOKEN_HERE"
+      GITLAB_TOKEN:
+        value: "PLACE_YOUR_GITLAB_TOKEN_HERE"
+        sensitive: true
     buildFromGit: https://github.com/zeropsio/recipe-zcli-gitlab-runner
     # Set a fixed number of containers, runners shouldn't be scaling horizontally automatically
     minContainers: 2
