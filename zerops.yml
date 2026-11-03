@@ -30,7 +30,7 @@ zerops:
           if [ -f 'initialized' ]; then exit 0; fi
           sudo gitlab-runner start
           sudo gitlab-runner unregister --name "${ZEROPS_StackName?:}-${ZEROPS_Number?:}" || true
-          sudo gitlab-runner register --non-interactive --url "${GITLAB_URL?:}" --token "${GITLAB_TOKEN?:}" --executor shell --name "${ZEROPS_StackName?:}-${ZEROPS_Number?:}"
+          sudo gitlab-runner register --non-interactive --url "${GITLAB_URL?:}" --clone-url "${GITLAB_URL?:}" --token "${GITLAB_TOKEN?:}" --executor shell --name "${ZEROPS_StackName?:}-${ZEROPS_Number?:}"
           touch initialized
 
       # https://docs.gitlab.com/runner/commands/#gitlab-runner-status
