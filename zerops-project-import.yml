@@ -7,7 +7,6 @@ services:
   - hostname: zclirunner
     type: ubuntu@26.04
     vault:
-    vault:
       TAG: zcli
       GITLAB_TOKEN:
         value: "PLACE_YOUR_GITLAB_TOKEN_HERE"
